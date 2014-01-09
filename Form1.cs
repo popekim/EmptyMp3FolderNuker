@@ -23,7 +23,8 @@ namespace EmptyMp3FolderNuker
         
         void IsEmptyRecur(string path, ParallelQuery<string> files)
         {
-            if (files.Any(f => f.IndexOf(path.ToLower()) >= 0))
+            string pathToTest = path.EndsWith(@"\") ? path : path + @"\";
+            if (files.Any(f => f.IndexOf(pathToTest.ToLower()) >= 0))
             {
                 var dirs = Directory.EnumerateDirectories(path);
                 foreach (var dir in dirs)
